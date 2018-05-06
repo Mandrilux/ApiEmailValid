@@ -30,5 +30,5 @@ fi
 mx="$(nslookup -q=mx $domain | grep "mail exchanger" | head -n 1 | cut -d ' ' -f 5)"
 
 echo "le mx  = " $mx
-#(sleep 1; echo "helo hi"; sleep 1; echo "mail from: <toto@gmail.com>"; sleep 1; echo "rcpt to: <dailybet@dailybet.fr>"; sleep 1; echo "exit") | telnet mail.dailybet.fr 25
+#(sleep 1; echo "helo hi"; sleep 1; echo "mail from: <toto@gmail.com>"; sleep 1; echo "rcpt to: <email@domaine.fr>"; sleep 1; echo "exit") | telnet $mx 25
 (sleep 1; echo "helo hi"; sleep 1; echo "mail from: <toto@gmail.com>"; sleep 1; echo "rcpt to: <$email>"; sleep 1; echo "exit") | telnet $mx 25
