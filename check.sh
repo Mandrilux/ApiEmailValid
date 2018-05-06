@@ -31,4 +31,12 @@ mx="$(nslookup -q=mx $domain | grep "mail exchanger" | head -n 1 | cut -d ' ' -f
 
 echo "le mx  = " $mx
 #(sleep 1; echo "helo hi"; sleep 1; echo "mail from: <toto@gmail.com>"; sleep 1; echo "rcpt to: <email@domaine.fr>"; sleep 1; echo "exit") | telnet $mx 25
-(sleep 1; echo "helo hi"; sleep 1; echo "mail from: <toto@gmail.com>"; sleep 1; echo "rcpt to: <$email>"; sleep 1; echo "exit") | telnet $mx 25
+value="$((sleep 1; echo "helo hi"; sleep 1; echo "mail from: <toto@gmail.com>"; sleep 1; echo "rcpt to: <$email>"; sleep 1; echo "exit") | telnet $mx 25 | grep "250" | wc -l)"
+echo $value
+if [ $value != 3 ]
+then
+        echo "Problem with this email"
+	exit 42
+fi
+echo "Email found"
+exit 0
